@@ -8,4 +8,11 @@ class UserRouterImpl(private val router: Router) : UsersRouter {
         router.replaceScreen(fragment)
     }
 
+    override fun navigateTo(fragment: FragmentScreen) {
+        router.navigateTo(fragment)
+    }
+
+    override fun backTo() {
+        router.backTo(null)
+    }
 }

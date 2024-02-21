@@ -5,4 +5,8 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 interface UsersRouter {
     fun replaceItemUser(fragment: FragmentScreen)
+
+    fun navigateTo(fragment: FragmentScreen)
+
+    fun backTo()
 }

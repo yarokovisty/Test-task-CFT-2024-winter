@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.testtask.databinding.FragmentUsersBinding
+import com.example.testtask.R
+import com.example.testtask.databinding.FragmentInfoUserBinding
 
-
-class UsersFragment : Fragment() {
-    private var _binding: FragmentUsersBinding? = null
+class InfoUserFragment : Fragment() {
+    private var _binding: FragmentInfoUserBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,10 +17,9 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentUsersBinding.inflate(inflater, container, false)
+        _binding = FragmentInfoUserBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
