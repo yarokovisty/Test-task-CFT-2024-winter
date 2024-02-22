@@ -7,4 +7,8 @@ class UserNavViewModel(private val router: UsersRouter) : ViewModel() {
     fun replaceScreen(fragmentScreen: FragmentScreen) {
         router.replaceItemUser(fragmentScreen)
     }
+
+    fun navigateTo(fragmentScreen: FragmentScreen) {
+        router.navigateTo(fragmentScreen)
+    }
 }

@@ -54,6 +54,7 @@ class UserAdapter(private val onItemClickListener: OnItemClickListener) :
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.bind(users[position])
 
+
     }
 
     @SuppressLint("NotifyDataSetChanged")

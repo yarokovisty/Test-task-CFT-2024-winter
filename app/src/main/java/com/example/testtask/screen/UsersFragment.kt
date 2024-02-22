@@ -13,12 +13,16 @@ import com.example.testtask.databinding.FragmentUsersBinding
 import com.example.testtask.mainActivity
 import kotlinx.coroutines.launch
 import com.example.testtask.data.user_model.Result
+import com.example.testtask.navigation.App
+import com.example.testtask.navigation.UserNavViewModel
+import com.example.testtask.ui.Screens
 
 
 class UsersFragment : Fragment(), OnItemClickListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
     private var adapter: UserAdapter? = null
+    private val viewModel = UserNavViewModel(App.INSTANCE.userRouter)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,10 @@ class UsersFragment : Fragment(), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tbUsers.setNavigationOnClickListener {
+            launchUsersLoading()
+        }
 
         launchUsersLoading()
     }
@@ -83,7 +91,7 @@ class UsersFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-
+        viewModel.navigateTo(Screens.infoUserScreen())
     }
 
 }
