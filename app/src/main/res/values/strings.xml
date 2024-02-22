@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Test task</string>
+    <string name="app_name">Random user</string>
     <string name="refresh">Refresh</string>
     <string name="cft">CFT</string>
-    <string name="template_name" translatable="false">%s %s %s</string>
+    <string name="template_name" translatable="false">%s %s</string>
     <string name="template_address" translatable="false">%s %s</string>
 </resources>

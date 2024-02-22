@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.testtask.R
 import com.example.testtask.databinding.ItemUserBinding
 import com.example.testtask.data.user_model.Result
 
-class UserAdapter(private val onItemClickListener: OnItemClickListener) :
+class UserAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<UserAdapter.UserHolder>() {
     private val users = mutableListOf<Result>()
 
@@ -21,7 +22,6 @@ class UserAdapter(private val onItemClickListener: OnItemClickListener) :
             user.name?.apply {
                 tvName.text = String.format(
                     itemView.context.getString(R.string.template_name),
-                    title,
                     first,
                     last
                 )
@@ -54,6 +54,9 @@ class UserAdapter(private val onItemClickListener: OnItemClickListener) :
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.bind(users[position])
 
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(position)
+        }
 
     }
 
@@ -61,5 +64,9 @@ class UserAdapter(private val onItemClickListener: OnItemClickListener) :
     fun addUsers(listUser: List<Result>) {
         users.addAll(listUser)
         notifyDataSetChanged()
+    }
+
+    fun getUser(position: Int): Result {
+        return users[position]
     }
 }

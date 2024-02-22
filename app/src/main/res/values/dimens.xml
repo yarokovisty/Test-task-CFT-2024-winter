@@ -2,5 +2,13 @@
 <resources>
     <dimen name="width_img_item">100dp</dimen>
     <dimen name="height_img_item">100dp</dimen>
-    <dimen name="margin_cardview">8dp</dimen>
+    <dimen name="margin_cardview">12dp</dimen>
+    <dimen name="corners_cardview">8dp</dimen>
+    <dimen name="padding_img">4dp</dimen>
+    <dimen name="stroke_width">4dp</dimen>
+    <dimen name="text_name">18sp</dimen>
+    <dimen name="size_name_info">20sp</dimen>
+    <dimen name="size_another_info">16sp</dimen>
+    <dimen name="margin_vertical_item_info">4dp</dimen>
+    <dimen name="margin_horizontal_item_info">8dp</dimen>
 </resources>

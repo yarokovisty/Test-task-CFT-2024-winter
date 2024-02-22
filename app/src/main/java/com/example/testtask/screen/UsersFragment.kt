@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.testtask.data.ViewModelData
 import com.example.testtask.data.rv.OnItemClickListener
 import com.example.testtask.data.rv.UserAdapter
 import com.example.testtask.databinding.FragmentUsersBinding
@@ -23,6 +26,7 @@ class UsersFragment : Fragment(), OnItemClickListener {
     private val binding get() = _binding!!
     private var adapter: UserAdapter? = null
     private val viewModel = UserNavViewModel(App.INSTANCE.userRouter)
+    private val viewModelData: ViewModelData by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,6 +96,7 @@ class UsersFragment : Fragment(), OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         viewModel.navigateTo(Screens.infoUserScreen())
+        viewModelData.infoUser.value = adapter?.getUser(position)
     }
 
 }
