@@ -3,4 +3,5 @@
     <string name="refresh">Refresh</string>
     <string name="cft">CFT</string>
     <string name="template_name" translatable="false">%s %s %s</string>
+    <string name="template_address" translatable="false">%s %s</string>
 </resources>

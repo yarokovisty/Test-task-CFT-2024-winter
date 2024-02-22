@@ -46,16 +46,16 @@ class UsersFragment : Fragment(), OnItemClickListener {
 
         lifecycleScope.launch{
             val repository = mainActivity.repository
-            val users = repository.getUsers()
+            val users = repository.getUsers().results
 
-//            showContent(users)
-//            try {
-//                val repository = mainActivity.repository
-//                val users = repository.getUsers().results
-//                showContent(users)
-//            } catch (ex: Exception) {
-//                showError(ex.message.orEmpty())
-//            }
+            showContent(users)
+            try {
+                val repository = mainActivity.repository
+                val users = repository.getUsers().results
+                showContent(users)
+            } catch (ex: Exception) {
+                showError(ex.message.orEmpty())
+            }
         }
     }
 
