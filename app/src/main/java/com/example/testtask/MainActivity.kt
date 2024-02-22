@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.testtask.navigation.App
 import com.example.testtask.navigation.UserNavViewModel
+import com.example.testtask.retrofit.UserRepository
 import com.example.testtask.ui.Screens
 import com.github.terrakok.cicerone.androidx.AppNavigator
 
 class MainActivity : AppCompatActivity() {
+    val repository = UserRepository()
     private val navigatorHolder = App.INSTANCE.navigatorHolder
     private val navigator = AppNavigator(this, R.id.fragmentScreen)
     private val viewModel = UserNavViewModel(App.INSTANCE.userRouter)

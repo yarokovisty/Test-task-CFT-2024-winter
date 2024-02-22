@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Test task</string>
+    <string name="refresh">Перезагрузить</string>
+    <string name="cft">ЦФТ</string>
+</resources>
