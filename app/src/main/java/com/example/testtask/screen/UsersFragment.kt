@@ -45,10 +45,6 @@ class UsersFragment : Fragment(), OnItemClickListener {
         showProgress()
 
         lifecycleScope.launch{
-            val repository = mainActivity.repository
-            val users = repository.getUsers().results
-
-            showContent(users)
             try {
                 val repository = mainActivity.repository
                 val users = repository.getUsers().results
