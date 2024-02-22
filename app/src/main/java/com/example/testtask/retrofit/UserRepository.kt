@@ -1,6 +1,5 @@
 package com.example.testtask.retrofit
 
-import com.example.testtask.data.user_model.PeopleRandom
 import com.example.testtask.data.user_model.UsersResponse
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -43,6 +42,6 @@ class UserRepository {
         retrofit.create(MainApi::class.java)
     }
 
-    suspend fun getUsers(): PeopleRandom = mainApi.getUsers()
+    suspend fun getUsers(): UsersResponse = mainApi.getUsers()
 
 }
