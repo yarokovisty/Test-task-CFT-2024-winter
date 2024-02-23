@@ -1,5 +1,6 @@
 package com.example.testtask.retrofit
 
+import android.util.Log
 import com.example.testtask.data.user_model.UsersResponse
 import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
@@ -48,6 +49,9 @@ class UserRepository {
         retrofit.create(MainApi::class.java)
     }
 
-    suspend fun getUsers(): UsersResponse = mainApi.getUsers()
+    suspend fun getUsers(): UsersResponse{
+        Log.i("MyLog", "123")
+        return mainApi.getUsers()
+    }
 
 }

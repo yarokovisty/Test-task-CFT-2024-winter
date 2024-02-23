@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.example.testtask.R
 import com.example.testtask.data.ViewModelData
+import com.example.testtask.data.db.User
 import com.example.testtask.data.rv.InfoAdapter
 import com.example.testtask.data.rv.InfoModel
 import com.example.testtask.databinding.FragmentInfoUserBinding
@@ -55,11 +56,11 @@ class InfoUserFragment : Fragment() {
                 if (isAdded && activity != null) {
                     user.apply {
                         Glide.with(this@InfoUserFragment)
-                            .load(picture?.large)
+                            .load(picture)
                             .into(imgInfoProfile)
-                        tvInfoName.text = String.format(getString(R.string.template_name), name?.first, name?.last)
-                        tvDateBirthday.text = dob?.date?.let { dateFormat(it) }
-                        tvSex.text = gender
+                        tvInfoName.text = String.format(getString(R.string.template_name), firstName, lastName)
+                        tvDateBirthday.text = birthday?.let { dateFormat(it) }
+                        tvSex.text = sex
                     }
 
                     addInfo(user)
@@ -80,19 +81,19 @@ class InfoUserFragment : Fragment() {
         return outputFormat.format(date)
     }
 
-    private fun addInfo(information: Result) {
+    private fun addInfo(information: User) {
         adapter?.apply {
-            addInfo(InfoModel(getString(R.string.age), information.dob?.age.toString()))
-            addInfo(InfoModel(getString(R.string.country), information.location?.country.toString()))
-            addInfo(InfoModel(getString(R.string.state), information.location?.state.toString()))
-            addInfo(InfoModel(getString(R.string.city), information.location?.city.toString()))
-            addInfo(InfoModel(getString(R.string.timezone), information.location?.timezone?.offset.toString()))
-            addInfo(InfoModel(getString(R.string.postcode), information.location?.postcode.toString()))
-            addInfo(InfoModel(getString(R.string.email), information.email.toString()))
-            addInfo(InfoModel(getString(R.string.phone), information.phone.toString()))
-            addInfo(InfoModel(getString(R.string.cell), information.cell.toString()))
-            addInfo(InfoModel(getString(R.string.location),
-                "${information.location?.coordinates?.latitude}, ${information.location?.coordinates?.longitude}"))
+            addInfo(InfoModel(getString(R.string.age), information.age!!))
+            addInfo(InfoModel(getString(R.string.country), information.country!!))
+            addInfo(InfoModel(getString(R.string.state), information.state!!))
+            addInfo(InfoModel(getString(R.string.city), information.city!!))
+            addInfo(InfoModel(getString(R.string.address), information.address!!))
+            addInfo(InfoModel(getString(R.string.postcode), information.postcode!!))
+            addInfo(InfoModel(getString(R.string.timezone), information.timezone!!))
+            addInfo(InfoModel(getString(R.string.email), information.email!!))
+            addInfo(InfoModel(getString(R.string.phone), information.phone!!))
+            addInfo(InfoModel(getString(R.string.cell), information.cell!!))
+            addInfo(InfoModel(getString(R.string.location), information.location!!))
         }
     }
 

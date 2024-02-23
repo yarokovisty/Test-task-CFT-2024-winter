@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -39,6 +40,8 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.6.1"
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -53,6 +56,8 @@ dependencies {
     // viewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
     //Retrofit - Работа с сетью
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -69,8 +74,14 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
-    // Moshi
+    // Moshi - Обработка json
     implementation ("com.squareup.moshi:moshi:1.13.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.13.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    // Room - БД
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    testImplementation("androidx.room:room-testing:$roomVersion")
 }
