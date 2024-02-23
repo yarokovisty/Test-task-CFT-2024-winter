@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginVertical="@dimen/margin_vertical_item_info"
     android:layout_marginHorizontal="@dimen/margin_horizontal_item_info"
+    android:layout_marginVertical="@dimen/margin_vertical_item_info"
+    android:layout_marginBottom="@dimen/margin_bottom_rv_info"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTitleInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:layout_weight="1"
-        tools:text="Phone"/>
+        android:textSize="@dimen/size_text_info_item"
+        android:textStyle="bold"
+        tools:text="Phone" />
 
     <TextView
         android:id="@+id/tvInfo"

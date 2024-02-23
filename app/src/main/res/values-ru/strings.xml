@@ -3,4 +3,15 @@
     <string name="app_name">Test task</string>
     <string name="refresh">Перезагрузить</string>
     <string name="cft">ЦФТ</string>
+    <string name="age">Возраст</string>
+    <string name="country">Страна</string>
+    <string name="state">Регион</string>
+    <string name="city">Город</string>
+    <string name="timezone">Часовой пояс</string>
+    <string name="address">Адрес</string>
+    <string name="postcode">Индекс</string>
+    <string name="email">Почта</string>
+    <string name="phone">Телефон</string>
+    <string name="cell">Сотовый</string>
+    <string name="location">Местонахождение</string>
 </resources>

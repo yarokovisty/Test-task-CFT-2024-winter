@@ -1,5 +1,6 @@
 package com.example.testtask.data.rv
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import com.example.testtask.R
 import com.example.testtask.databinding.ItemInfoBinding
 
 class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
-    private val listInfo = mutableListOf<InfoModel>()
+    private val info = mutableListOf<InfoModel>()
 
     class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemInfoBinding.bind(view)
@@ -27,14 +28,16 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return listInfo.size
+        return info.size
     }
 
     override fun onBindViewHolder(holder: InfoViewHolder, position: Int) {
-        holder.bind(listInfo[position])
+        holder.bind(info[position])
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addInfo(listInfo: InfoModel) {
-
+        info.add(listInfo)
+        notifyDataSetChanged()
     }
 }
