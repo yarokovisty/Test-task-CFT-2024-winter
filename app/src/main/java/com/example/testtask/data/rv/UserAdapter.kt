@@ -63,5 +63,7 @@ class UserAdapter(private val listener: OnItemClickListener) :
         return users[position]
     }
 
-    fun clearUsers() = users.clear()
+    fun getSize() = users.size
+
+    fun clearAll() = users.clear()
 }

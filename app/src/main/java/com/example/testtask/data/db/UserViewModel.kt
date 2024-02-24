@@ -1,8 +1,10 @@
 package com.example.testtask.data.db
 
 import android.app.Application
+import android.text.BoringLayout
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +30,12 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun deleteAllUsers() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllUsers()
+        }
+    }
+
+    fun updateUsers(users: List<User>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateUsers(users)
         }
     }
 

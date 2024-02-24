@@ -50,7 +50,6 @@ class UserRepository {
     }
 
     suspend fun getUsers(): UsersResponse{
-        Log.i("MyLog", "123")
         return mainApi.getUsers()
     }
 

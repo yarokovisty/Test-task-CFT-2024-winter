@@ -7,11 +7,15 @@ import androidx.room.Index
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(users: List<User>)
+
+    @Update
+    suspend fun updateUsers(users: List<User>)
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<User>>
@@ -21,4 +25,5 @@ interface UserDao {
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAllUsers()
+
 }

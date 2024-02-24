@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -31,7 +34,6 @@ class UsersFragment : Fragment(), OnItemClickListener {
     private val viewModel = UserNavViewModel(App.INSTANCE.userRouter)
     private val viewModelData: ViewModelData by activityViewModels()
     private lateinit var userViewModel: UserViewModel
-    private var refresh = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,18 +49,23 @@ class UsersFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        adapter = UserAdapter(this@UsersFragment)
 
         binding.tbUsers.setNavigationOnClickListener {
-            refresh = true
             userViewModel.deleteAllUsers()
+            adapter?.clearAll()
 
         }
 
+        userViewModel.readAllData.observe(viewLifecycleOwner) {users ->
+            adapter?.addUsers(users)
 
-        launchUsersLoading()
+            launchUsersLoading()
+        }
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -67,34 +74,23 @@ class UsersFragment : Fragment(), OnItemClickListener {
     }
 
     private fun launchUsersLoading() {
-        userViewModel.readAllData.observe(viewLifecycleOwner) {users ->
-            showProgress()
-            if (users.isEmpty() && !refresh) {
-                loadUsers()
-            } else if (refresh) {
-                loadUsers()
-                refresh = false
-            }
-            else {
-                showContent(users)
-                refresh = false
-            }
+        showProgress()
 
 
+        if (adapter?.getSize() == 0) {
+            loadUsers()
+        } else {
+            showContent()
         }
-
-
     }
 
 
-    private fun showContent(users: List<User>) = with(binding) {
+    private fun showContent() = with(binding) {
         pbUsersContent.isVisible = false
         contentError.isVisible = false
 
         rvUsers.isVisible = true
 
-        adapter = UserAdapter(this@UsersFragment)
-        adapter?.addUsers(users)
         rvUsers.adapter = adapter
     }
 
@@ -145,16 +141,19 @@ class UsersFragment : Fragment(), OnItemClickListener {
                 }
 
                 userViewModel.addUsers(usersList)
-                showContent(usersList)
+                showContent()
             } catch (ex: Exception) {
                 showError(ex.message.orEmpty())
             }
         }
     }
+
+
     override fun onItemClick(position: Int) {
         viewModel.navigateTo(Screens.infoUserScreen())
         viewModelData.infoUser.value = adapter?.getUser(position)
     }
+
 
 
 }
