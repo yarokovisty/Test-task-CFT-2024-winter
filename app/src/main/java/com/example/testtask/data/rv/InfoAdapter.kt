@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testtask.R
 import com.example.testtask.databinding.ItemInfoBinding
 
-class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
+class InfoAdapter : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
     private val info = mutableListOf<InfoModel>()
 
     class InfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,6 +33,8 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     override fun onBindViewHolder(holder: InfoViewHolder, position: Int) {
         holder.bind(info[position])
+
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -40,4 +42,6 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
         info.add(listInfo)
         notifyDataSetChanged()
     }
+
+
 }

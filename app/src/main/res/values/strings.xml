@@ -15,4 +15,6 @@
     <string name="phone">Phone</string>
     <string name="cell">Cell</string>
     <string name="location">Coordinates</string>
+    <string name="error">Error</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -1,12 +1,16 @@
 package com.example.testtask.screen
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
 import android.icu.text.IDNA.Info
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
@@ -52,6 +56,8 @@ class InfoUserFragment : Fragment() {
                 viewModel.backTo()
             }
 
+
+
             viewModelData.infoUser.observe(activity as LifecycleOwner) {user ->
                 if (isAdded && activity != null) {
                     user.apply {
@@ -61,10 +67,37 @@ class InfoUserFragment : Fragment() {
                         tvInfoName.text = String.format(getString(R.string.template_name), firstName, lastName)
                         tvDateBirthday.text = birthday?.let { dateFormat(it) }
                         tvSex.text = sex
+
+                        imgBtnNumber.setOnClickListener {
+                            val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"))
+
+                            moveToActivity(callIntent)
+                        }
+
+                        imgBtnEmail.setOnClickListener {
+                            val mailIntent = Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(Intent.EXTRA_EMAIL, arrayOf(email)) // recipients
+                            }
+
+                            moveToActivity(mailIntent)
+                        }
+
+                        imgBtnCoordinates.setOnClickListener {
+                            val locationIntent: Intent = Uri.parse(
+                                "geo:$location"
+                            ).let {
+                                Intent(Intent.ACTION_VIEW, it)
+                            }
+
+                            moveToActivity(locationIntent)
+                        }
                     }
 
                     addInfo(user)
                     binding.rvInformation.adapter = adapter
+
+
                 }
 
             }
@@ -97,6 +130,23 @@ class InfoUserFragment : Fragment() {
         }
     }
 
+    private fun moveToActivity(intent: Intent) {
+        try {
+            startActivity(intent)
+        } catch (ex: Exception) {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            builder
+                .setTitle(getString(R.string.error))
+                .setMessage(ex.message.orEmpty())
+                .setPositiveButton(R.string.cancel) { dialog, _ ->
+                    dialog.cancel()
+                }
 
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+        }
+
+    }
 
 }
