@@ -24,9 +24,9 @@ object UserListScreen : KScreen<UserListScreen>() {
     val tvSex = KTextView{withId(R.id.tvSex)}
 
     class UserItemScreen(parent: Matcher<View>) : KRecyclerItem<UserItemScreen>(parent) {
-        val tvName = KTextView {withId(R.id.tvName)}
-        val tvAddress = KTextView {withId(R.id.tvAddress)}
-        val tvPhoneNumber = KTextView {withId(R.id.tvPhoneNumber)}
+        val tvName = KTextView(parent) {withId(R.id.tvName)}
+        val tvAddress = KTextView(parent) {withId(R.id.tvAddress)}
+        val tvPhoneNumber = KTextView(parent) {withId(R.id.tvPhoneNumber)}
     }
 
 

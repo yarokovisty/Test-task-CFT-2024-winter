@@ -8,8 +8,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kaspresso.screen.UserListScreen
 import kaspresso.tools.annotation.TestCase
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import okhttp3.Request
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -20,39 +23,6 @@ import org.junit.runner.RunWith
 class UserListTest : KTestCase() {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
-
-    private val server = MockWebServer()
-    private val fakeServerResponse = """
-{
-  "users": [
-    {
-      "name": "Ryan Gosling",
-      "address": "123 Main St",
-      "phoneNumber": "555-1234"
-    },
-    {
-      "name": "Andrey Shtrich",
-      "address": "456 Elm St",
-      "phoneNumber": "555-5678"
-    },
-    {
-      "name": "Kostya Tubic",
-      "address": "789 Oak St",
-      "phoneNumber": "555-9012"
-    },
-    {
-      "name": "Oleg Skuff",
-      "address": "1 Usova",
-      "phoneNumber": "555-9012"
-    },
-    {
-      "name": "Ann Altushka",
-      "address": "789 Oak St",
-      "phoneNumber": "555-9012"
-    }
-  ]
-}
-"""
 
 
     @Test
@@ -80,32 +50,45 @@ class UserListTest : KTestCase() {
     }
 
     @Test
-    @TestCase(name = "Test-2", description = "")
+    @TestCase(name = "Test-2", description = "Check if name, address and phone are displayed correctly")
     fun checkLoadAndDisplayedList() {
-        before {
-            server.start()
-            enqueueFakeData()
+        run {
+            checkUser(
+                User("Ryan Gosling ", "123 Main St", "555-1234"),
+                User("Andrey Shtrich ", "456 Elm St", "555-5678"),
+                User("Kostya Tubic ", "789 Oak St", "555-9012"),
+                User("Oleg Skuff ", "1 Usova", "555-9012"),
+                User("Ann Altushka ", "789 Oak St", "555-9012"),
 
-        }.after {
-            server.shutdown()
-        }.run {
+            )
+        }
 
-            step("") {
-                val request = server.takeRequest()
+    }
+
+    class User(val name: String, val address: String, val phoneNumber: String)
+
+    private fun checkUser(vararg users: User) {
+        users.forEachIndexed { index, user ->
+            UserListScreen {
+                rvUsers {
+                    childAt<UserListScreen.UserItemScreen>(index) {
+                        tvName {
+                            isDisplayed()
+                            hasText(user.name)
+                        }
+                        tvAddress {
+                            isDisplayed()
+                            hasText(user.address)
+                        }
+                        tvPhoneNumber {
+                            isDisplayed()
+                            hasText(user.phoneNumber)
+                        }
+                    }
+                }
             }
-
         }
     }
-
-    data class User(val name: String, val address: String, val phoneNumber: String)
-
-    private fun enqueueFakeData() {
-        val fakeResponse = MockResponse()
-            .setResponseCode(200)
-            .setBody(fakeServerResponse) // Здесь fakeServerResponse - это ваш фэйковый ответ с данными
-        server.enqueue(fakeResponse)
-    }
-
 
 
 }
