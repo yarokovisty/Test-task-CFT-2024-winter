@@ -137,6 +137,7 @@ class UsersFragment : Fragment(), OnItemClickListener {
                         it.cell,
                         "${it.location?.coordinates?.latitude}, ${it.location?.coordinates?.longitude}"
                     )
+            
                     usersList.add(user)
                 }
 

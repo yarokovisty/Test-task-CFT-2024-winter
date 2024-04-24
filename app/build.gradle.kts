@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
     val roomVersion = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -84,4 +85,14 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:core-ktx:1.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.2")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
+
 }
